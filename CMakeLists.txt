@@ -3,4 +3,4 @@ project(SDP_Practicum_Social_Network)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(SDP_Practicum_Social_Network main.cpp)
+add_executable(SDP_Practicum_Social_Network main.cpp User.h Commands/Command.h Commands/AddUserCommand.h Commands/ExitCommand.h Functionality/Invoker.h)
