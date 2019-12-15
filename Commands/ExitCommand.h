@@ -7,9 +7,10 @@
 
 #include "Command.h"
 class ExitCommand:public Command {
-    CommandType commandType;
 public:
-    ExitCommand():commandType(Exit){}
+    ExitCommand():Command(){
+        commandType=Exit;
+    }
     void execute() override{
         exit(0);
     }

@@ -8,10 +8,13 @@
 
 #include <string>
 #include "../Commands/Command.h"
+#include "../Commands/AddUserCommand.h"
+#include "../Commands/ExitCommand.h"
 class Invoker {
 public:
-    void determinate(std::string command){
-
+    Command* determinate(std::string const & command){
+        if(command=="CREATE") return new AddUserCommand();
+        if(command=="EXIT") return new ExitCommand();
     }
 };
 

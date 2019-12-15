@@ -8,12 +8,15 @@
 #include "Command.h"
 
 class AddUserCommand: public Command {
-    CommandType commandType;
 public:
-    AddUserCommand(std::vector<User> const & _users , std::string const & _args): Command(_users, _args),
-    commandType(AddUser){}
+    AddUserCommand():Command(){
+        commandType=AddUser;
+    }
+    AddUserCommand(std::vector<User> const & _users, std::string const & _args=""): Command(_users, _args){
+        commandType= AddUser;
+    }
     void execute(){
-
+        std::cout<<"Added user! \n";
     }
 };
 

@@ -9,17 +9,19 @@
 #include "../User.h"
 enum CommandType{
     AddUser,
-    Exit
+    Exit,
+    Null
 };
 class Command {
 protected:
     std::vector<User> users;
     std::string args;
+    CommandType commandType;
 public:
-    Command():users(nullptr),args(nullptr){}
+    Command():users(),args(""),commandType(Null){}
     Command(std::vector<User> const & _users,std::string const & _args): users(_users)
-    ,args(_args){}
-    virtual ~Command()=0;
+    ,args(_args),commandType(Null){}
+    //virtual ~Command()=0;
     virtual void execute()=0;
 };
 
