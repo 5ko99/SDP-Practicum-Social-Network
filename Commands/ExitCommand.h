@@ -14,6 +14,7 @@ public:
     void execute() override{
         exit(0);
     }
+    ~ExitCommand(){}
 };
 
 

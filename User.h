@@ -10,29 +10,26 @@ class User {
 private:
     std::string name;
     short age;
-    int id;
-    User(std::string const & _name, short _age):name(_name),age(_age){
-        id=generateID();
-    }
-    int generateID(){
-       srand(time(NULL)+std::stoi(name)+age);
-       return rand();
-    }
+    std::string email;
 public:
+    User(std::string const & _name, short _age,std::string const & _email):name(_name),age(_age),email(_email){}
     std::string getName() const{
         return name;
     }
     short getAge() const{
         return age;
     }
-    int getID() const{
-        return id;
+    std::string getEmail() const{
+        return email;
     }
     void setName(std::string const & _name){
         name=_name;
     }
     void setAge(short _age){
         age=_age;
+    }
+    void setEmail(std::string const & _email){
+        email=_email;
     }
 };
 

@@ -9,15 +9,15 @@
 
 class AddUserCommand: public Command {
 public:
-    AddUserCommand():Command(){
-        commandType=AddUser;
-    }
-    AddUserCommand(std::vector<User> const & _users, std::string const & _args=""): Command(_users, _args){
+    AddUserCommand(std::vector<std::string> const & _args){
         commandType= AddUser;
+        User _user(_args[1],stoi(_args[2]),_args[3]);
+        users.push_back(_user);
     }
     void execute(){
-        std::cout<<"Added user! \n";
+        std::cout<<"Added user:"<<users[0].getName()<<' '<<users[0].getAge()<<' '<<users[0].getEmail()<<std::endl;
     }
+    ~AddUserCommand(){}
 };
 
 

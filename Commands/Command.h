@@ -10,18 +10,20 @@
 enum CommandType{
     AddUser,
     Exit,
-    Null
+    Delete,
+    Link,
+    Find,
+    Ban,
+    Delink,
+    Recommend
 };
 class Command {
 protected:
     std::vector<User> users;
-    std::string args;
     CommandType commandType;
 public:
-    Command():users(),args(""),commandType(Null){}
-    Command(std::vector<User> const & _users,std::string const & _args): users(_users)
-    ,args(_args),commandType(Null){}
-    //virtual ~Command()=0;
+    Command(){};
+    virtual ~Command(){};
     virtual void execute()=0;
 };
 
