@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Command.h"
+#include "../Functionality/FindUser.h"
 class FindCommand: public Command {
 public:
     FindCommand(std::vector<std::string> const & _args){
@@ -15,7 +16,7 @@ public:
         users.push_back(_user1);
     }
     void execute(){
-        std::cout<<"Find user:"<<users[0].getName()<<std::endl;
+        findUser(users[0].name);
     }
     ~FindCommand(){}
 };

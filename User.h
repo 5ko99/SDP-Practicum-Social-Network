@@ -6,12 +6,11 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_USER_H
 
 #include <string>
-class User {
-private:
+
+struct User {
     std::string name;
     short age;
     std::string email;
-public:
     User(std::string const & _name, short _age,std::string const & _email):name(_name),age(_age),email(_email){}
     std::string getName() const{
         return name;

@@ -6,6 +6,7 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_ADDUSERCOMMAND_H
 
 #include "Command.h"
+#include "../Functionality/AddUser.h"
 
 class AddUserCommand: public Command {
 public:
@@ -15,7 +16,7 @@ public:
         users.push_back(_user);
     }
     void execute(){
-        std::cout<<"Added user:"<<users[0].getName()<<' '<<users[0].getAge()<<' '<<users[0].getEmail()<<std::endl;
+        addUser(users[0]);
     }
     ~AddUserCommand(){}
 };
