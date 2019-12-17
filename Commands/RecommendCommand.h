@@ -11,10 +11,10 @@ class RecommendCommand: public Command {
 public:
     RecommendCommand(std::vector<std::string> const & _args){
         commandType= Recommend;
-        User _user(_args[1],0,"");
+        User _user(_args[1].c_str(),0,"");
         users.push_back(_user);
     }
-    void execute(){
+    void execute(DynamicArray& arr){
         std::cout<<"Recommendation for user:"<<users[0].getName()<<std::endl;
     }
     ~RecommendCommand(){}

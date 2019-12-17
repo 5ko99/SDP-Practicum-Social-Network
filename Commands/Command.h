@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "../User.h"
+#include"../Utils/DynamicArray.h"
 enum CommandType{
     AddUser,
     Exit,
@@ -24,7 +25,7 @@ protected:
 public:
     Command(){};
     virtual ~Command(){};
-    virtual void execute()=0;
+    virtual void execute(DynamicArray&)=0;
 };
 
 

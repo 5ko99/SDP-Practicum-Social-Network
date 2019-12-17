@@ -9,31 +9,22 @@
 #include "../Global.h"
 #include <fstream>
 #include <cassert>
-
-bool checkNameFree(std::string const & name){
-    std::ifstream users(path);
-    assert(users);
-    std::string _name;
-    while(users >> _name){
-        if(_name == name){
+#include <vector>
+#include "../Utils/DynamicArray.h"
+bool checkNameFree(std::string const & name, DynamicArray& data){
+    for(size_t i=0;i<data.size();i++){
+        if(data[i].name==name){
             return false;
         }
-        std::getline(users,_name);
     }
-    users.close();
     return true;
 }
-void addUser(User const & user){
-    if(checkNameFree(user.name)) {
-        std::ofstream of(path, std::ios::app);
-        assert(of);
-        of << user.name << ' ' << user.age << ' ' << user.email << ' ' << std::endl;
-        of.close();
-        std::cout << "User " << user.name << " created \n";
-    }else{
-        std::cerr<<"Username "<<user.name<<" is taken! \n";
-    }
+void addUser(User & user, DynamicArray& data){
+  if(checkNameFree(user.name,data)){
+      data.pushBack(user);
+      std::cout<<"User "<<user.name<<" created \n";
+  }else{
+      std::cerr<<"Name is taken \n";
+  }
 }
-
-
 #endif //SDP_PRACTICUM_SOCIAL_NETWORK_ADDUSER_H

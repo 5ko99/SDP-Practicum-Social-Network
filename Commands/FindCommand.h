@@ -12,11 +12,11 @@ class FindCommand: public Command {
 public:
     FindCommand(std::vector<std::string> const & _args){
         commandType= Find;
-        User _user1(_args[1],0,"");
+        User _user1(_args[1].c_str(),0,"");
         users.push_back(_user1);
     }
-    void execute(){
-        findUser(users[0].name);
+    void execute(DynamicArray& arr){
+        findUser(users[0].name,arr);
     }
     ~FindCommand(){}
 };

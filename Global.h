@@ -7,7 +7,7 @@
 #include <string>
 #include <sstream>
 
-std::string path="../Data/users.txt";
+std::string path="../Data/users.dat";
 extern std::vector<std::string> split(const std::string& strToSplit, char delim)
 {
     std::stringstream ss(strToSplit);

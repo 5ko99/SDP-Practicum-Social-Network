@@ -11,7 +11,8 @@ public:
     ExitCommand():Command(){
         commandType=Exit;
     }
-    void execute() override{
+    void execute(DynamicArray& arr) override{
+        delete &arr;
         exit(0);
     }
     ~ExitCommand(){}

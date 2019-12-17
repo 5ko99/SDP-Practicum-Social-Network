@@ -12,11 +12,11 @@ class AddUserCommand: public Command {
 public:
     AddUserCommand(std::vector<std::string> const & _args){
         commandType= AddUser;
-        User _user(_args[1],stoi(_args[2]),_args[3]);
+        User _user(_args[1].c_str(),stoi(_args[2]),_args[3].c_str());
         users.push_back(_user);
     }
-    void execute(){
-        addUser(users[0]);
+    void execute(DynamicArray& arr){
+        addUser(users[0],arr);
     }
     ~AddUserCommand(){}
 };

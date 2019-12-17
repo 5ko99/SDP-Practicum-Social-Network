@@ -9,20 +9,13 @@
 #include "../Global.h"
 #include <fstream>
 #include <cassert>
-void findUser(std::string const & name){
-    std::ifstream users(path);
-    assert(users);
-    std::string _name;
-    while(users >> _name){
-        if(_name == name){
-            std::string age;
-            users>>age;
-            std::cout<<name<<' '<<age<<std::endl;
+void findUser(std::string const & name, DynamicArray & data){
+    for(int i=0;i<data.size();i++){
+        if(data[i].name==name){
+            std::cout<<"User \n --- \n Name:"<<name<<"\n Age:"<<data[i].age<<'\n';
             return;
         }
-        std::getline(users,_name);
     }
-    users.close();
     std::cerr<<"User not found! \n";
 }
 

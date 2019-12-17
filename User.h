@@ -6,12 +6,23 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_USER_H
 
 #include <string>
-
+//100 symbol max for name and email
+const short SIZE=100;
+void copyChar( char* dest,const char* data){
+    for(size_t i=0;i<SIZE;i++){
+        dest[i]=data[i];
+    }
+}
 struct User {
-    std::string name;
+    char name[100];
     short age;
-    std::string email;
-    User(std::string const & _name, short _age,std::string const & _email):name(_name),age(_age),email(_email){}
+    char email[100];
+    int id;
+    User(const char* _name, short _age,const char* _email,int _id=-1):age(_age),id(_id){
+        copyChar(name,_name);
+        copyChar(email,_email);
+    }
+    User():id(-1){}
     std::string getName() const{
         return name;
     }
@@ -20,15 +31,6 @@ struct User {
     }
     std::string getEmail() const{
         return email;
-    }
-    void setName(std::string const & _name){
-        name=_name;
-    }
-    void setAge(short _age){
-        age=_age;
-    }
-    void setEmail(std::string const & _email){
-        email=_email;
     }
 };
 
