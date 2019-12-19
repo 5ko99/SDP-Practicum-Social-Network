@@ -11,16 +11,21 @@
 #include <cassert>
 #include <vector>
 #include "../Utils/DynamicArray.h"
-bool checkNameFree(std::string const & name, DynamicArray& data){
+bool checkNameFree(std::string const & name, DynamicArray& data, int& id){
+    id=-1;
     for(size_t i=0;i<data.size();i++){
+        id=data[i].id;
         if(data[i].name==name){
             return false;
         }
     }
+    id++;
     return true;
 }
 void addUser(User & user, DynamicArray& data){
-  if(checkNameFree(user.name,data)){
+    int id;
+  if(checkNameFree(user.name,data,id)){
+      user.id=id;
       data.pushBack(user);
       std::cout<<"User "<<user.name<<" created \n";
   }else{

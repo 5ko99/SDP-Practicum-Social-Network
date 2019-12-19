@@ -14,7 +14,7 @@ class DynamicArray {
     std::vector<User> data;
 public:
     DynamicArray(){
-        std::ifstream users(path, std::ios::binary | std::ios::in);
+        std::ifstream users(pathUsers, std::ios::binary | std::ios::in);
         if (users) {
             User user;
             while (users.read((char *) &user, sizeof(User))) {
@@ -24,10 +24,8 @@ public:
         users.close();
     }
     ~DynamicArray(){
-        std::ofstream users(path,std::ios::binary|std::ios::out|std::ios::trunc);
-        data.shrink_to_fit();
+        std::ofstream users(pathUsers, std::ios::binary | std::ios::out | std::ios::trunc);
         for(int i=0;i<data.size();i++){
-            data[i].id=i;
             users.write((char*) &data[i], sizeof(User));
         }
         users.close();
