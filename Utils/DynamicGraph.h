@@ -78,8 +78,8 @@ public:
         graph.push_back(temp);
         graph[graph.size()-1][graph.size()-1]=defaultFriend;
     }
-    std::vector<int> operator[](int pos){
-        return graph[pos];
+    const std::vector<int> operator[](int pos){
+        return  graph[pos];
     }
     size_t size(){
         return graph.size();
@@ -91,6 +91,9 @@ public:
             }
         }
         std::cout<<'\n';
+    }
+    void getRecommendation(int id,std::vector<User> & arr){
+
     }
 };
 

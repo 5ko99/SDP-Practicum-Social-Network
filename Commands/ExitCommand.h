@@ -6,15 +6,14 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_EXITCOMMAND_H
 
 #include "Command.h"
+#include "../Functionality/Exit.h"
 class ExitCommand:public Command {
 public:
     ExitCommand():Command(){
         commandType=Exit;
     }
     void execute(DynamicArray& arr, DynamicGraph& friendships) override{
-        delete &arr;
-        delete &friendships;
-        exit(0);
+        exit(0,arr,friendships);
     }
     ~ExitCommand(){}
 };

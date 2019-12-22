@@ -21,7 +21,7 @@ class Invoker {
 public:
     Command* determinate(std::vector<std::string> args){
         std::string command = args[0];
-        if(command=="create") return new AddUserCommand(args);
+        if(command=="create" && args.size()==4) return new AddUserCommand(args);
         if(command=="exit") return new ExitCommand();
         if(command=="delete") return  new DeleteCommand(args);
         if(command=="link") return new LinkCommand(args);

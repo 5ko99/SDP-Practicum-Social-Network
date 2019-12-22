@@ -7,6 +7,8 @@
 
 #include "Command.h"
 #include <iostream>
+#include "../Functionality/Recommend.h"
+
 class RecommendCommand: public Command {
 public:
     RecommendCommand(std::vector<std::string> const & _args){
@@ -15,7 +17,7 @@ public:
         users.push_back(_user);
     }
     void execute(DynamicArray& arr, DynamicGraph& friendships){
-
+        recommend(users[0].name,arr,friendships);
     }
     ~RecommendCommand(){}
 };
