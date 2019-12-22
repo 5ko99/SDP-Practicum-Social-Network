@@ -25,7 +25,6 @@ public:
         User _user2(_args[2].c_str(),0,"");
         users.push_back(_user1);
         users.push_back(_user2);
-        //TODO: Fix if types doesn't exist!
         if(_args.size()>=4){
             _type=_args[3];
         }
