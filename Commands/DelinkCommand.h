@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Command.h"
 class DelinkCommand: public Command {
+    FriendshipType type;
 public:
     DelinkCommand(std::vector<std::string> const & _args){
         commandType= Delink;
@@ -15,9 +16,10 @@ public:
         User _user2(_args[2].c_str(),0,"");
         users.push_back(_user1);
         users.push_back(_user2);
+        type=delink;
     }
-    void execute(DynamicArray& arr){
-        std::cout<<"Delinked users:"<<users[0].getName()<<' '<<users[1].getName()<<std::endl;
+    void execute(DynamicArray& arr, DynamicGraph& friendships){
+        linkUsers(users[0].name,users[1].name,type,arr,friendships);
     }
     ~DelinkCommand(){}
 };

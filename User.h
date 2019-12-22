@@ -26,12 +26,6 @@ struct User {
     std::string getName() const{
         return name;
     }
-    short getAge() const{
-        return age;
-    }
-    std::string getEmail() const{
-        return email;
-    }
 };
 
 

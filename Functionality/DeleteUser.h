@@ -12,11 +12,12 @@
 #include <cassert>
 #include <iostream>
 #include "../Utils/DynamicArray.h"
-void deleteUser(std::string const & name, DynamicArray& data){
+void deleteUser(std::string const & name, DynamicArray& data, DynamicGraph& friendships){
     for(int i=0;i<data.size();i++){
         if(data[i].name==name){
-            std::cout<<"User "<<name<<" deleted! \n";
+            std::cout<<"User "<<name<<" has been deleted! \n";
             data.erase(i);
+            friendships.removeUser(data[i].id);
             return;
         }
     }

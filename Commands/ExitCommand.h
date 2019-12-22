@@ -11,8 +11,9 @@ public:
     ExitCommand():Command(){
         commandType=Exit;
     }
-    void execute(DynamicArray& arr) override{
+    void execute(DynamicArray& arr, DynamicGraph& friendships) override{
         delete &arr;
+        delete &friendships;
         exit(0);
     }
     ~ExitCommand(){}

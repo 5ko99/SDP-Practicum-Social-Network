@@ -7,8 +7,16 @@
 #include <string>
 #include <sstream>
 
-std::string pathUsers="../Data/users.dat";
-std::string pathGraph="../Data/graph.dat";
+const std::string pathUsers="../Data/users.dat";
+const std::string pathGraph="../Data/graph.dat";
+enum FriendshipType{
+    bestie,
+    family,
+    normal,
+    ban,
+    delink,
+    unban
+};
 extern std::vector<std::string> split(const std::string& strToSplit, char delim)
 {
     std::stringstream ss(strToSplit);

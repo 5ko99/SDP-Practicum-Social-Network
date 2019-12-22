@@ -15,8 +15,8 @@ public:
         User _user(_args[1].c_str(),0,"");
         users.push_back(_user);
     }
-    void execute(DynamicArray& arr){
-        deleteUser(users[0].name,arr);
+    void execute(DynamicArray& arr, DynamicGraph& friendships){
+        deleteUser(users[0].name,arr,friendships);
     }
     ~DeleteCommand(){}
 };

@@ -22,12 +22,13 @@ bool checkNameFree(std::string const & name, DynamicArray& data, int& id){
     id++;
     return true;
 }
-void addUser(User & user, DynamicArray& data){
+void addUser(User & user, DynamicArray& data, DynamicGraph& friendships){
     int id;
   if(checkNameFree(user.name,data,id)){
       user.id=id;
       data.pushBack(user);
-      std::cout<<"User "<<user.name<<" created \n";
+      friendships.addUser();
+      std::cout<<"User "<<user.name<<" created \n"<<user.id<<'\n';
   }else{
       std::cerr<<"Name is taken \n";
   }

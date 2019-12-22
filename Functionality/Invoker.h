@@ -16,6 +16,7 @@
 #include "../Commands/BanCommand.h"
 #include "../Commands/DelinkCommand.h"
 #include "../Commands/RecommendCommand.h"
+#include "../Commands/UnbanCommand.h"
 class Invoker {
 public:
     Command* determinate(std::vector<std::string> args){
@@ -27,7 +28,10 @@ public:
         if(command=="find") return new FindCommand(args);
         if(command=="ban") return new BanCommand(args);
         if(command=="delink") return new DelinkCommand(args);
+        if(command=="unban") return new UnbanCommand(args);
         if(command=="recommend") return new RecommendCommand(args);
+        std::cerr<<"Wrong command! \n";
+        return nullptr;
     }
 };
 

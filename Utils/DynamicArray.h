@@ -10,6 +10,8 @@
 #include <fstream>
 #include "../Global.h"
 #include <string>
+#include <cassert>
+
 class DynamicArray {
     std::vector<User> data;
 public:
@@ -25,6 +27,7 @@ public:
     }
     ~DynamicArray(){
         std::ofstream users(pathUsers, std::ios::binary | std::ios::out | std::ios::trunc);
+        assert(users);
         for(int i=0;i<data.size();i++){
             users.write((char*) &data[i], sizeof(User));
         }
@@ -41,6 +44,9 @@ public:
     }
     void erase(int pos){
         data.erase(data.begin()+pos);
+        for(int i=pos;i<data.size();i++){
+            data[i].id--;
+        }
     }
 };
 

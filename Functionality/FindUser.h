@@ -9,10 +9,15 @@
 #include "../Global.h"
 #include <fstream>
 #include <cassert>
-void findUser(std::string const & name, DynamicArray & data){
+void findUser(const User & user, DynamicArray & data, DynamicGraph& friendships){
+    std::string name=user.name;
     for(int i=0;i<data.size();i++){
         if(data[i].name==name){
             std::cout<<"User \n --- \n Name:"<<name<<"\n Age:"<<data[i].age<<'\n';
+            //TODO: Remove bellow line
+            std::cout<<"ID:"<<data[i].id<<std::endl;
+            std::cout<<"Friends: ";
+            friendships.getFriendsPrint(data[i].id,data);
             return;
         }
     }

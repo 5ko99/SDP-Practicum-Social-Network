@@ -4,19 +4,22 @@
 #include "Commands/Command.h"
 #include "Global.h"
 #include "Utils/DynamicArray.h"
+#include "Utils/DynamicGraph.h"
+
 int main() {
     Invoker i;
     std::string line;
     Command* command;
     std::vector<std::string> args;
-    DynamicArray* data = new DynamicArray;
+    auto* data = new DynamicArray;
+    auto* friendships= new DynamicGraph;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
     while(true){
         std::getline(std::cin,line);
         args=split(line,' ');
         command=i.determinate(args);
-        command->execute(*data);
+        if(command!= nullptr) command->execute(*data,*friendships);
     }
 #pragma clang diagnostic pop
 }

@@ -15,8 +15,8 @@ public:
         User _user(_args[1].c_str(),stoi(_args[2]),_args[3].c_str());
         users.push_back(_user);
     }
-    void execute(DynamicArray& arr){
-        addUser(users[0],arr);
+    void execute(DynamicArray& arr, DynamicGraph& friendships){
+        addUser(users[0],arr,friendships);
     }
     ~AddUserCommand(){}
 };

@@ -15,8 +15,8 @@ public:
         User _user1(_args[1].c_str(),0,"");
         users.push_back(_user1);
     }
-    void execute(DynamicArray& arr){
-        findUser(users[0].name,arr);
+    void execute(DynamicArray& arr, DynamicGraph& friendships){
+        findUser(users[0],arr,friendships);
     }
     ~FindCommand(){}
 };
