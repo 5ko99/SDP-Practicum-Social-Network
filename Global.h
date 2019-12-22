@@ -28,4 +28,9 @@ extern std::vector<std::string> split(const std::string& strToSplit, char delim)
     }
     return splittedStrings;
 }
+struct UserRecommendation{
+    int id;
+    int index;
+    int power;
+};
 #endif //SDP_PRACTICUM_SOCIAL_NETWORK_GLOBAL_H

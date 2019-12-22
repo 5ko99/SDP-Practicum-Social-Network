@@ -22,14 +22,14 @@ public:
     Command* determinate(std::vector<std::string> args){
         std::string command = args[0];
         if(command=="create" && args.size()==4) return new AddUserCommand(args);
-        if(command=="exit") return new ExitCommand();
-        if(command=="delete") return  new DeleteCommand(args);
-        if(command=="link") return new LinkCommand(args);
-        if(command=="find") return new FindCommand(args);
-        if(command=="ban") return new BanCommand(args);
-        if(command=="delink") return new DelinkCommand(args);
-        if(command=="unban") return new UnbanCommand(args);
-        if(command=="recommend") return new RecommendCommand(args);
+        if(command=="exit"&& args.size()==1) return new ExitCommand();
+        if(command=="delete"&& args.size()==2) return  new DeleteCommand(args);
+        if(command=="link" && (args.size()==3||args.size()==4)) return new LinkCommand(args);
+        if(command=="find" && args.size()==2) return new FindCommand(args);
+        if(command=="ban" && args.size()==3) return new BanCommand(args);
+        if(command=="delink"&& args.size()==3) return new DelinkCommand(args);
+        if(command=="unban"&& args.size()==3) return new UnbanCommand(args);
+        if(command=="recommend"&& args.size()==2) return new RecommendCommand(args);
         std::cerr<<"Wrong command! \n";
         return nullptr;
     }

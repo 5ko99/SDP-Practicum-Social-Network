@@ -11,6 +11,7 @@
 #include "../Global.h"
 #include <string>
 #include <cassert>
+#include <algorithm>
 #include "DynamicArray.h"
 
 class DynamicGraph {
@@ -86,14 +87,48 @@ public:
     }
     void getFriendsPrint(int id, DynamicArray& arr){
         for(size_t i=0;i<graph.size();++i){
-            if(graph[id][i]!=0&&i!=id){
+            if((graph[id][i]==2 || graph[id][i]==3 || graph[id][i]==4)&&i!=id){
                 std::cout<<arr[i].name<<' ';
             }
         }
         std::cout<<'\n';
     }
-    void getRecommendation(int id,std::vector<User> & arr){
+    void getRecommendation(int id,std::vector<UserRecommendation> & arr){
+        std::vector<int> friends;
+        getFriends(id,friends);
+        if(friends.size()!=0){
+            std::vector<std::vector<int>> commonFriends;
+            findCommonFriends(id,friends,commonFriends);
+            std::sort(commonFriends.begin(),commonFriends.end(),std::greater<std::vector<int>>());
+            UserRecommendation temp;
+            for(int i=0;i<commonFriends.size();i++){
+                for(int j=0;j<commonFriends[i].size();j++){
+                    if(graph[id][commonFriends[i][j]]==1){
+                        temp.id=commonFriends[i][j];
+                        temp.power=graph[id][i];
+                        temp.index=commonFriends[i][j];
+                        arr.push_back(temp);
+                    }
+                }
+            }
+        }else{
 
+        }
+
+    }
+    void findCommonFriends(int id,std::vector<int> & friends,std::vector<std::vector<int>> & commonFriends){
+        std::vector<int> temp;
+        for(int i=0;i<friends.size();i++){
+            getFriends(friends[i],temp);
+            commonFriends.push_back(temp);
+        }
+    }
+    void getFriends(int id,std::vector<int> & arr){
+        for(size_t i=0;i<graph.size();++i){
+            if((graph[id][i]==2 || graph[id][i]==3 || graph[id][i]==4)&&i!=id){
+                arr.push_back(i);
+            }
+        }
     }
 };
 
