@@ -70,10 +70,10 @@ public:
         int defaultValue=1;
         int defaultFriend=2;
         std::vector<int> temp;
-        for(int i=0;i<=graph.size();++i){
+        for(size_t i=0;i<=graph.size();++i){
             temp.push_back(defaultValue);
         }
-        for(int i=0;i<graph.size();++i){
+        for(size_t i=0;i<graph.size();++i){
             graph[i].push_back(defaultValue);
         }
         graph.push_back(temp);
@@ -99,14 +99,15 @@ public:
         if(friends.size()!=0){
             std::vector<std::vector<int>> commonFriends;
             findCommonFriends(id,friends,commonFriends);
-            std::sort(commonFriends.begin(),commonFriends.end(),std::greater<std::vector<int>>());
+            //std::sort(commonFriends.begin(),commonFriends.end(),std::greater<std::vector<int>>());
             UserRecommendation temp;
             for(int i=0;i<commonFriends.size();i++){
                 for(int j=0;j<commonFriends[i].size();j++){
                     if(graph[id][commonFriends[i][j]]==1){
                         temp.id=commonFriends[i][j];
                         temp.power=graph[id][i];
-                        temp.index=commonFriends[i][j];
+                        std::cout<<graph[id][i]<<'\n';
+                        temp.index=i;
                         arr.push_back(temp);
                     }
                 }
@@ -124,6 +125,7 @@ public:
         }
     }
     void getFriends(int id,std::vector<int> & arr){
+        arr.clear();
         for(size_t i=0;i<graph.size();++i){
             if((graph[id][i]==2 || graph[id][i]==3 || graph[id][i]==4)&&i!=id){
                 arr.push_back(i);

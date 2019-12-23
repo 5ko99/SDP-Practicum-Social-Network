@@ -29,18 +29,23 @@ void swap(int i,int j, std::vector<UserRecommendation> & arr){
 }
 void sortRecommendations(std::vector<UserRecommendation> & arr){
     int n=arr.size();
-    for (size_t i = 0; i < n-1; i++)
-        for (size_t j = 0; j < n-i-1; j++)
+    for (int i = 0; i < n-1; i++)
+        for (int j = 0; j < n-i-1; j++)
             if (arr[j].power < arr[j+1].power&&arr[j].index==arr[j+1].index)
                 swap(j,j+1,arr);
 }
 void removeDuplicates(std::vector<UserRecommendation> & v){
     std::vector<UserRecommendation>::iterator itr = v.begin();
     std::unordered_set<int> s;
-
+    int lastPower;
     for (auto curr = v.begin(); curr != v.end(); ++curr) {
-        if (s.insert(curr->id).second)
+        if (s.insert(curr->id).second){
+            lastPower=curr->power;
             *itr++ = *curr;
+        }else{
+            itr->power+=lastPower;
+        }
+
     }
 
     v.erase(itr, v.end());
@@ -61,14 +66,16 @@ void recommend(std::string const & name, DynamicArray& data, DynamicGraph& frien
     }
     friendships.getRecommendation(id,recommendedUsers);
     sortRecommendations(recommendedUsers);
-    recommendedUsers.resize(maxRecommendations);
     //Remove duplicates
     removeDuplicates(recommendedUsers);
     std::vector<std::string> userNames;
     getUserNames(recommendedUsers,data,userNames);
     std::cout<<"Recommendations: ";
+    int n=0;
     for(auto i: userNames){
-        std::cout<<i<<'\n';
+        std::cout<<i<<" ";
+        n++;
+        if(n==30) break;
     }
     std::cout<<'\n';
 }
