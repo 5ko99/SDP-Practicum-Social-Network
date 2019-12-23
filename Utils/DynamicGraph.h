@@ -112,7 +112,7 @@ public:
                 }
             }
         }else{
-
+            //TODO: if user have no friends
         }
 
     }

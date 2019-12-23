@@ -2,9 +2,6 @@
 #include <string>
 #include "Functionality/Invoker.h"
 #include "Commands/Command.h"
-#include "Global.h"
-#include "Utils/DynamicArray.h"
-#include "Utils/DynamicGraph.h"
 
 int main() {
     Invoker i;

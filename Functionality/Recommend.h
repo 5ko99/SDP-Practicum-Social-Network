@@ -27,31 +27,41 @@ void swap(int i,int j, std::vector<UserRecommendation> & arr){
     arr[i]=arr[j];
     arr[j]=temp;
 }
-void sortRecommendations(std::vector<UserRecommendation> & arr){
-    std::unordered_set<int> set;
+void sortByID(std::vector<UserRecommendation> & arr){
     int n=arr.size();
     for (int i = 0; i < n-1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
-            if (arr[j].power < arr[j + 1].power && arr[j].index == arr[j + 1].index)
+            if (arr[j].id > arr[j + 1].id)
                 swap(j, j + 1, arr);
         }
     }
 }
-void removeDuplicates(std::vector<UserRecommendation> & v){
-    std::vector<UserRecommendation>::iterator itr = v.begin();
-    std::unordered_set<int> s;
-    int lastPower;
-    for (auto curr = v.begin(); curr != v.end(); ++curr) {
-        if (s.insert(curr->id).second){
-            lastPower=curr->power;
-            *itr++ = *curr;
-        }else{
-            itr->power+=lastPower;
+void sortByPower(std::vector<UserRecommendation> & arr){
+    int n=arr.size();
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j].power < arr[j + 1].power)
+                swap(j, j + 1, arr);
         }
-
     }
-
-    v.erase(itr, v.end());
+}
+bool isIn(std::vector<UserRecommendation> & arr, int id){
+    for(UserRecommendation j : arr)
+        if(j.id == id) return true;
+    return false;
+}
+void removeDuplicates(std::vector<UserRecommendation> & v){
+   std::vector<UserRecommendation> result;
+   int lastPower;
+   for(auto & i : v){
+       if(!isIn(result,i.id)){
+            lastPower=i.power;
+            result.push_back(i);
+       }else{
+           result.back().power+=lastPower;
+       }
+   }
+   v=result;
 }
 void getUserNames(std::vector<UserRecommendation> & userRec,
                   DynamicArray& data,std::vector<std::string> & userNames){
@@ -68,9 +78,10 @@ void recommend(std::string const & name, DynamicArray& data, DynamicGraph& frien
         return;
     }
     friendships.getRecommendation(id,recommendedUsers);
-    sortRecommendations(recommendedUsers);
+    sortByID(recommendedUsers);
     //Remove duplicates
     removeDuplicates(recommendedUsers);
+    sortByPower(recommendedUsers);
     std::vector<std::string> userNames;
     getUserNames(recommendedUsers,data,userNames);
     std::cout<<"Recommendations: ";
