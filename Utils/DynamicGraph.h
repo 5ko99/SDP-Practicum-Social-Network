@@ -106,7 +106,6 @@ public:
                     if(graph[id][commonFriends[i][j]]==1){
                         temp.id=commonFriends[i][j];
                         temp.power=graph[id][i];
-                        std::cout<<graph[id][i]<<'\n';
                         temp.index=i;
                         arr.push_back(temp);
                     }

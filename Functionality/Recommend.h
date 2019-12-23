@@ -28,11 +28,14 @@ void swap(int i,int j, std::vector<UserRecommendation> & arr){
     arr[j]=temp;
 }
 void sortRecommendations(std::vector<UserRecommendation> & arr){
+    std::unordered_set<int> set;
     int n=arr.size();
-    for (int i = 0; i < n-1; i++)
-        for (int j = 0; j < n-i-1; j++)
-            if (arr[j].power < arr[j+1].power&&arr[j].index==arr[j+1].index)
-                swap(j,j+1,arr);
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j].power < arr[j + 1].power && arr[j].index == arr[j + 1].index)
+                swap(j, j + 1, arr);
+        }
+    }
 }
 void removeDuplicates(std::vector<UserRecommendation> & v){
     std::vector<UserRecommendation>::iterator itr = v.begin();
