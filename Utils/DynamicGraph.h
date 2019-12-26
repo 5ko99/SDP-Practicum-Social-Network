@@ -112,9 +112,21 @@ public:
                 }
             }
         }else{
-            //TODO: if user have no friends
+            findMostSocialUsers(arr,id);
         }
 
+    }
+    void findMostSocialUsers(std::vector<UserRecommendation> & arr, int id){
+        UserRecommendation temp;
+        for(size_t i=0;i<graph.size();++i) {
+            if(i==id) continue;
+            temp.id=i;
+            for (size_t j = 0; j < graph[i].size(); ++j) {
+                temp.power += graph[i][j];
+            }
+            arr.push_back(temp);
+            temp.power=0;
+        }
     }
     void findCommonFriends(int id,std::vector<int> & friends,std::vector<std::vector<int>> & commonFriends){
         std::vector<int> temp;

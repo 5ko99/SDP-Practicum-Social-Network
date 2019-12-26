@@ -29,6 +29,7 @@ extern std::vector<std::string> split(const std::string& strToSplit, char delim)
     return splittedStrings;
 }
 struct UserRecommendation{
+    UserRecommendation():id(0),index(0),power(0){}
     int id;
     int index;
     int power;
