@@ -52,7 +52,7 @@ bool isIn(std::vector<UserRecommendation> & arr, int id){
 }
 void removeDuplicates(std::vector<UserRecommendation> & v){
    std::vector<UserRecommendation> result;
-   int lastPower;
+   int lastPower=0;
    for(auto & i : v){
        if(!isIn(result,i.id)){
             lastPower=i.power;
@@ -69,8 +69,8 @@ void getUserNames(std::vector<UserRecommendation> & userRec,
         userNames.push_back(data[userRec[i].id].name);
     }
 }
+//TODO: Check if it's better way of removing duplicates
 void recommend(std::string const & name, DynamicArray& data, DynamicGraph& friendships){
-    const short maxRecommendations = 30;
     int id=findID(name,data);
     std::vector<UserRecommendation> recommendedUsers;
     if(id==-1){
@@ -85,11 +85,8 @@ void recommend(std::string const & name, DynamicArray& data, DynamicGraph& frien
     std::vector<std::string> userNames;
     getUserNames(recommendedUsers,data,userNames);
     std::cout<<"Recommendations: ";
-    int n=0;
     for(auto i: userNames){
         std::cout<<i<<" ";
-        n++;
-        if(n==30) break;
     }
     std::cout<<'\n';
 }

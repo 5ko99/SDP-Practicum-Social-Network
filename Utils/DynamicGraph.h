@@ -94,19 +94,19 @@ public:
         std::cout<<'\n';
     }
     void getRecommendation(int id,std::vector<UserRecommendation> & arr){
+        const short maxRecommendations = 30;
         std::vector<int> friends;
         getFriends(id,friends);
         if(friends.size()!=0){
-            std::vector<std::vector<int>> commonFriends;
-            findCommonFriends(id,friends,commonFriends);
-            //std::sort(commonFriends.begin(),commonFriends.end(),std::greater<std::vector<int>>());
+            std::vector<std::vector<int>> friendFriends;
+            findFriendFriends(friends, friendFriends);
             UserRecommendation temp;
-            for(int i=0;i<commonFriends.size();i++){
-                for(int j=0;j<commonFriends[i].size();j++){
-                    if(graph[id][commonFriends[i][j]]==1){
-                        temp.id=commonFriends[i][j];
-                        temp.power=graph[id][i];
-                        temp.index=i;
+            for(int i=0; i < friendFriends.size(); i++){
+                for(int j=0; j < friendFriends[i].size(); j++){
+                    if(arr.size()==maxRecommendations) return;
+                    if(graph[id][friendFriends[i][j]] == 1){//We are not friends and we are not banned
+                        temp.id=friendFriends[i][j];
+                        temp.power=graph[id][i]+graph[i][j];//How good friend I am with my friend i and how good is he with his friend j
                         arr.push_back(temp);
                     }
                 }
@@ -128,7 +128,7 @@ public:
             temp.power=0;
         }
     }
-    void findCommonFriends(int id,std::vector<int> & friends,std::vector<std::vector<int>> & commonFriends){
+    void findFriendFriends(std::vector<int> & friends, std::vector<std::vector<int>> & commonFriends){
         std::vector<int> temp;
         for(int i=0;i<friends.size();i++){
             getFriends(friends[i],temp);
