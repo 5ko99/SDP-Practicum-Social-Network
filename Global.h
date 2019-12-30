@@ -29,8 +29,19 @@ extern std::vector<std::string> split(const std::string& strToSplit, char delim)
     return splittedStrings;
 }
 struct UserRecommendation{
-    UserRecommendation():id(0),power(0){}
+    UserRecommendation(int _id=0,int _power=0):id(_id),power(_power){}
     int id;
     int power;
+
+    void clear(){
+        id=0;power=0;
+    }
+    bool operator<(const UserRecommendation& s) const{
+        if(id==s.id){
+            return power<s.power;
+        }else{
+            return id<s.id;
+        }
+    }
 };
 #endif //SDP_PRACTICUM_SOCIAL_NETWORK_GLOBAL_H

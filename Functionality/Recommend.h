@@ -12,6 +12,7 @@
 #include <cassert>
 #include <vector>
 #include <unordered_set>
+#include <set>
 #include "../Utils/DynamicArray.h"
 #include "../Utils/DynamicGraph.h"
 int findID(std::string const & name, DynamicArray& data){
@@ -45,47 +46,42 @@ void sortByPower(std::vector<UserRecommendation> & arr){
         }
     }
 }
-bool isIn(std::vector<UserRecommendation> & arr, int id){
-    for(UserRecommendation j : arr)
-        if(j.id == id) return true;
-    return false;
-}
-void removeDuplicates(std::vector<UserRecommendation> & v){
-   std::vector<UserRecommendation> result;
-   int lastPower=0;
-   for(auto & i : v){
-       if(!isIn(result,i.id)){
-            lastPower=i.power;
-            result.push_back(i);
-       }else{
-           result.back().power+=lastPower;
-       }
-   }
-   v=result;
-}
-void getUserNames(std::vector<UserRecommendation> & userRec,
+void getUserNames(std::set<UserRecommendation> & userRec,
                   DynamicArray& data,std::vector<std::string> & userNames){
-    for(int i=0;i<userRec.size();i++){
-        userNames.push_back(data[userRec[i].id].name);
+    std::vector<UserRecommendation> rec;
+    int n=0;
+    rec.emplace_back(*userRec.begin());
+    for(const auto& i: userRec){
+        if(rec[n].id==i.id){
+            if(rec[n].power<i.power){
+                rec[n].power+=i.power;//sum all the powers
+            }
+        }else{
+            ++n;
+            rec.emplace_back(i);
+        }
+    }
+    //TODO: not doing it this way in final
+    sortByPower(rec);
+    n=0;
+    for(const auto& i:rec){
+        if(n==30) return;
+        userNames.emplace_back(data[i.id].name);
+        n++;
     }
 }
-//TODO: Check if it's better way of removing duplicates
 void recommend(std::string const & name, DynamicArray& data, DynamicGraph& friendships){
     int id=findID(name,data);
-    std::vector<UserRecommendation> recommendedUsers;
     if(id==-1){
         std::cerr<<"Wrong name! \n";
         return;
     }
+    std::set<UserRecommendation> recommendedUsers;
     friendships.getRecommendation(id,recommendedUsers);
-    sortByID(recommendedUsers);
-    //Remove duplicates
-    removeDuplicates(recommendedUsers);
-    sortByPower(recommendedUsers);
     std::vector<std::string> userNames;
     getUserNames(recommendedUsers,data,userNames);
     std::cout<<"Recommendations: ";
-    for(auto i: userNames){
+    for(const auto& i: userNames){
         std::cout<<i<<" ";
     }
     std::cout<<'\n';
