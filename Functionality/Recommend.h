@@ -6,8 +6,8 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_RECOMMEND_H
 
 #include <iostream>
-#include "../User.h"
-#include "../Global.h"
+#include "../Utils/User.h"
+#include "../Utils/Global.h"
 #include <fstream>
 #include <cassert>
 #include <vector>

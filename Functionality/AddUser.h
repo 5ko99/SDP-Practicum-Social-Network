@@ -5,8 +5,8 @@
 #ifndef SDP_PRACTICUM_SOCIAL_NETWORK_ADDUSER_H
 #define SDP_PRACTICUM_SOCIAL_NETWORK_ADDUSER_H
 
-#include "../User.h"
-#include "../Global.h"
+#include "../Utils/User.h"
+#include "../Utils/Global.h"
 #include <fstream>
 #include <cassert>
 #include <vector>

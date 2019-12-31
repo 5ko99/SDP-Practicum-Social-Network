@@ -6,7 +6,7 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_COMMAND_H
 
 #include <vector>
-#include "../User.h"
+#include "../Utils/User.h"
 #include"../Utils/DynamicArray.h"
 #include "../Utils/DynamicGraph.h"
 enum CommandType{
@@ -24,8 +24,8 @@ protected:
     std::vector<User> users;
     CommandType commandType;
 public:
-    Command(){};
-    virtual ~Command(){};
+    Command()= default;
+    virtual ~Command()= default;
     virtual void execute(DynamicArray&,DynamicGraph&)=0;
 };
 

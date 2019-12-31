@@ -6,8 +6,8 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_DELETEUSER_H
 
 
-#include "../User.h"
-#include "../Global.h"
+#include "../Utils/User.h"
+#include "../Utils/Global.h"
 #include <fstream>
 #include <cassert>
 #include <iostream>

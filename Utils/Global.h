@@ -6,7 +6,7 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_GLOBAL_H
 #include <string>
 #include <sstream>
-
+/* NOLINT */
 const std::string pathUsers="../Data/users.dat";
 const std::string pathGraph="../Data/graph.dat";
 enum FriendshipType{
@@ -29,7 +29,7 @@ extern std::vector<std::string> split(const std::string& strToSplit, char delim)
     return splittedStrings;
 }
 struct UserRecommendation{
-    UserRecommendation(int _id=0,int _power=0):id(_id),power(_power){}
+    explicit UserRecommendation(int _id=0,int _power=0):id(_id),power(_power){}
     int id;
     int power;
 

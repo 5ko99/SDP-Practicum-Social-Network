@@ -23,7 +23,7 @@ struct User {
         copyChar(name,_name);
         copyChar(email,_email);
     }
-    User():id(-1){}
+    User():name(""),age(-1),email(""),id(-1),friends(0){}
 };
 
 

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "Functionality/Invoker.h"
-#include "Commands/Command.h"
 
 int main() {
     Invoker i;

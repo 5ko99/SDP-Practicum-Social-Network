@@ -6,12 +6,11 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_DYNAMICARRAY_H
 
 #include <vector>
-#include "../User.h"
+#include "User.h"
 #include <fstream>
-#include "../Global.h"
+#include "Global.h"
 #include <string>
 #include <cassert>
-//TODO: Change dynamic array using set
 class DynamicArray {
     std::vector<User> data;
 public:

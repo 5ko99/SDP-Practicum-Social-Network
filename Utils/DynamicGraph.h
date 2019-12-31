@@ -6,9 +6,9 @@
 #define SDP_PRACTICUM_SOCIAL_NETWORK_DYNAMICGRAPH_H
 
 #include <vector>
-#include "../User.h"
+#include "User.h"
 #include <fstream>
-#include "../Global.h"
+#include "Global.h"
 #include <string>
 #include <cassert>
 #include <algorithm>
@@ -107,13 +107,15 @@ public:
     }
 
     bool getRecommendation(int id,std::set<UserRecommendation> & s, DynamicArray& data){
+        //User don't have friends
         if(data[id].friends==0){
-
+            findMostSocialUsers(s,id,data);
             return false;
         }
-        for(unsigned i=0;i<graph[id].size();++i){
+        //User have friends
+        for(int i=0;i<graph[id].size();++i){
             if((graph[id][i]==2 || graph[id][i]==3 || graph[id][i]==4)&&i!=id){
-                for(unsigned j=0;j<graph.size();++j){
+                for(int j=0;j<graph.size();++j){
                     if((graph[j][i]==2 || graph[j][i]==3 || graph[j][i]==4)&&j!=id){
                         if(graph[id][j]==1){
                             UserRecommendation ur(j,graph[j][i]+graph[id][i]);
@@ -123,9 +125,14 @@ public:
                 }
             }
         }
+        return true;
     }
     void findMostSocialUsers(std::set<UserRecommendation> & arr, int id, DynamicArray& data){
-
+        for(int i=0;i<data.size();++i){
+            if(i==id) continue;
+            auto ur=UserRecommendation(i,data[i].friends);
+            arr.emplace(ur);
+        }
     }
 };
 
