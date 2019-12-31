@@ -36,11 +36,19 @@ struct UserRecommendation{
     void clear(){
         id=0;power=0;
     }
+//    bool operator<(const UserRecommendation& s) const{
+//        if(id==s.id){
+//            return power<s.power;
+//        }else{
+//            return id<s.id;
+//        }
+//    }
+    //for test
     bool operator<(const UserRecommendation& s) const{
-        if(id==s.id){
-            return power<s.power;
-        }else{
+        if(power==s.power){
             return id<s.id;
+        }else{
+            return power<s.power;
         }
     }
 };

@@ -46,7 +46,15 @@ void linkUsers(std::string const & user1,std::string const & user2,FriendshipTyp
         std::cerr<<"Users are banned! \n";
         return;
     }
-    friendships.addEdge(id1,id2,friendshipTypeToInt(type));
+    if(friendships.addEdge(id1,id2,friendshipTypeToInt(type))){
+        if(type==2||type==3||type==4){
+          ++data[id1].friends;
+          ++data[id2].friends;
+        }else{
+            --data[id1].friends;
+            --data[id2].friends;
+        }
+    }
 }
 
 

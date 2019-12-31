@@ -11,7 +11,7 @@
 #include "../Global.h"
 #include <string>
 #include <cassert>
-
+//TODO: Change dynamic array using set
 class DynamicArray {
     std::vector<User> data;
 public:

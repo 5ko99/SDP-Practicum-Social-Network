@@ -18,14 +18,12 @@ struct User {
     short age;
     char email[100];
     int id;
-    User(const char* _name, short _age,const char* _email,int _id=-1):age(_age),id(_id){
+    int friends;
+    User(const char* _name, short _age,const char* _email,int _id=-1,int _friends=0):age(_age),id(_id),friends(_friends){
         copyChar(name,_name);
         copyChar(email,_email);
     }
     User():id(-1){}
-    std::string getName() const{
-        return name;
-    }
 };
 
 

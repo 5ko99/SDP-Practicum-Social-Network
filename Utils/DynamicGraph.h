@@ -47,9 +47,19 @@ public:
                 graphFile<<'\n';
         }
     }
-    void addEdge(int userA,int userB, int type){
-        graph[userA][userB]= type;
-        graph[userB][userA]=type;
+    bool addEdge(int userA,int userB, int type){
+        if(graph[userA][userB]==type && graph[userB][userA]==type) {
+            return false;
+        } else{
+            graph[userA][userB]= type;
+            graph[userB][userA]=type;
+            if((graph[userA][userB]==0 || graph[userA][userB]==1) && (type==0 || type==1)) return false;
+            return ((graph[userA][userB] == 2 && graph[userB][userA] == 2) ||
+                    (graph[userA][userB] == 3 && graph[userB][userA] == 3)
+                    || (graph[userA][userB] == 4 && graph[userB][userA] == 4)) ==
+                   !(type == 2 || type == 3 || type == 4);
+        }
+
     }
     void removeEdge(int userA,int userB){
         graph[userA][userB]= 1;
@@ -95,7 +105,11 @@ public:
         std::cout<<'\n';
     }
 
-    void getRecommendation(int id,std::set<UserRecommendation> & s){
+    bool getRecommendation(int id,std::set<UserRecommendation> & s, DynamicArray& data){
+        if(data[id].friends==0){
+
+            return false;
+        }
         for(unsigned i=0;i<graph[id].size();++i){
             if((graph[id][i]==2 || graph[id][i]==3 || graph[id][i]==4)&&i!=id){
                 for(unsigned j=0;j<graph.size();++j){
@@ -108,6 +122,9 @@ public:
                 }
             }
         }
+    }
+    void findMostSocialUsers(std::set<UserRecommendation> & arr, int id, DynamicArray& data){
+
     }
 };
 
