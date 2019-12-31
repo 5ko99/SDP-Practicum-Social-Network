@@ -48,18 +48,19 @@ public:
         }
     }
     bool addEdge(int userA,int userB, int type){
+        bool flag1=true,flag2;
         if(graph[userA][userB]==type && graph[userB][userA]==type) {
             return false;
         } else{
-            graph[userA][userB]= type;
-            graph[userB][userA]=type;
-            if((graph[userA][userB]==0 || graph[userA][userB]==1) && (type==0 || type==1)) return false;
-            return ((graph[userA][userB] == 2 && graph[userB][userA] == 2) ||
+            if((graph[userA][userB]==0 || graph[userA][userB]==1) && (type==0 || type==1)) flag1=false;
+            flag2 = ((graph[userA][userB] == 2 && graph[userB][userA] == 2) ||
                     (graph[userA][userB] == 3 && graph[userB][userA] == 3)
                     || (graph[userA][userB] == 4 && graph[userB][userA] == 4)) ==
                    !(type == 2 || type == 3 || type == 4);
+            graph[userA][userB]= type;
+            graph[userB][userA]=type;
         }
-
+        return flag1&&flag2;
     }
     void removeEdge(int userA,int userB){
         graph[userA][userB]= 1;
